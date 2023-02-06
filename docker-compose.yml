@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  mysql:
+    image: mysql:8.0.32
+    ports:
+      - $DB_PORT_DOCKER:$DB_PORT_DOCKER
+    env_file: .env
+    environment:
+      MYSQL_DATABASE: $DATABASE
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+    volumes:
+      - ./databases:/var/lib/mysql:rw
