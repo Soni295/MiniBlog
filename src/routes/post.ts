@@ -1,9 +1,9 @@
-import { Request, Response, Router } from "express";
+import { Request, Response, Router } from 'express';
 
-const router = Router()
+const router = Router();
 
-router.get("", (_: Request, res: Response) => {
-  res.send({data: "post"})
-})
+router.get('', (_: Request, res: Response) => {
+  res.send({data: 'post'});
+});
 
-export { router }
+export { router };

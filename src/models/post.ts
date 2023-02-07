@@ -1,11 +1,11 @@
-import sequelize from "../database/mysql";
-import {DataTypes, Model} from "sequelize";
+import sequelize from '../database/mysql';
+import {DataTypes, Model} from 'sequelize';
 
 class Post extends Model {
-  declare id: number
-  declare userId: number
-  declare title: string
-  declare body: string
+  declare id: number;
+  declare userId: number;
+  declare title: string;
+  declare body: string;
 }
 
 Post.init({
@@ -26,12 +26,6 @@ Post.init({
     type:DataTypes.TEXT,
     allowNull: false
   }
-}, {sequelize})
+}, {sequelize});
 
-/*
-(async ()=> {
-  await sequelize.sync()
-})();
-*/
-
-export default Post
+export default Post;

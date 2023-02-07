@@ -1,12 +1,12 @@
-import sequelize from "../database/mysql";
-import { DataTypes, Model } from "sequelize";
-import Post from "./post"
+import sequelize from '../database/mysql';
+import { DataTypes, Model } from 'sequelize';
+import Post from './post';
 
 class User extends Model {
-  declare id: number
-  declare name: string
-  declare password: string
-  declare email: string
+  declare id: number;
+  declare name: string;
+  declare password: string;
+  declare email: string;
 }
 
 User.init({
@@ -27,16 +27,16 @@ User.init({
     type:DataTypes.TEXT,
     allowNull: false
   }
-}, {sequelize})
+}, {sequelize});
 
 User.hasMany(Post, {
-  foreignKey: "userId",
-  sourceKey: "id"
-})
+  foreignKey: 'userId',
+  sourceKey: 'id'
+});
 
 Post.belongsTo(User, {
-  foreignKey: "userId",
-  targetKey:"id"
-})
+  foreignKey: 'userId',
+  targetKey:'id'
+});
 
-export default User
+export default User;

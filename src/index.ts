@@ -1,14 +1,12 @@
-import "dotenv/config"
-import express from "express"
-import cors from "cors"
-import { router } from "./routes"
-import sequelize from "./database/mysql"
-import "./models/user"
-
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import { router } from './routes';
+import sequelize from './database/mysql';
 
 async function main() {
-  const PORT = process.env.PORT || 3000
-  const app = express()
+  const PORT = process.env.PORT || 3000;
+  const app = express();
 
   try {
     await sequelize.sync();
@@ -21,8 +19,7 @@ async function main() {
     .use(express.json())
     .use(cors())
     .use(router)
-    .listen(PORT, ()=> console.log(`server listening in the port: ${PORT}`))
-
+    .listen(PORT, ()=> console.log(`server listening in the port: ${PORT}`));
 }
 
-main()
+main();
