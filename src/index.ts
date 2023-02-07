@@ -10,7 +10,6 @@ async function main() {
   const PORT = process.env.PORT || 3000
   const app = express()
 
-
   try {
     await sequelize.sync();
   } catch(e){

@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import User from "../models/user"
+import {deleteById, getAll, getbyId, insert, update} from "../services/user"
 import {handlerHttp} from "../utils/error.handler"
 
 const ERRORS = {
@@ -13,41 +13,31 @@ const ERRORS = {
 export const getUser = async(req: Request, res: Response) => {
   try {
     const { id } = req.params
-    const user = await User.findByPk(id)
+    const user = await getbyId(id)
     res.json(user)
   } catch(e){ handlerHttp(res, ERRORS.GET_USER) }
 }
 
 export const getUsers = async(_: Request, res: Response) => {
   try {
-    const AllUsers = await User.findAll()
+    const AllUsers = await getAll()
     res.json(AllUsers)
   } catch(e){ handlerHttp(res, ERRORS.GET_USERS) }
 }
 
 export const postUser = async (req: Request, res: Response) => {
   try {
-    const {name, email, password} = req.body
-
-    const NewUser = await User.create({
-      name, email, password
-    })
+    const NewUser = await insert(req.body)
     res.json(NewUser)
-  } catch(e){ handlerHttp(res, ERRORS.POST_USER) }
+  } catch(e){ handlerHttp(res, ERRORS.POST_USER, e) }
 }
 
 export const updateUser = async(req: Request, res: Response) => {
   try {
     const { id } = req.params
     const { name, email, password } = req.body
-    const currentUser = await User.findByPk(id)
+    const currentUser = await update({name, email, password, id: Number(id)})
 
-    if (currentUser) {
-      currentUser.name = name ? name : currentUser.name
-      currentUser.email = email ? email : currentUser.email
-      currentUser.password = password ? password : password
-      await currentUser.save()
-    }
     res.json(currentUser)
   } catch(e){ handlerHttp(res, ERRORS.UPDATE_USER) }
 }
@@ -55,8 +45,7 @@ export const updateUser = async(req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params
-    await User.destroy({ where: { id } })
-    console.log(id)
+    await deleteById(id)
     res.sendStatus(204)
   } catch(e){ handlerHttp(res, ERRORS.DELETE_USER) }
 }
