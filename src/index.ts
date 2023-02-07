@@ -2,12 +2,28 @@ import "dotenv/config"
 import express from "express"
 import cors from "cors"
 import { router } from "./routes"
+import sequelize from "./database/mysql"
+import "./models/user"
 
-const PORT = process.env.PORT || 3000
-const app = express()
 
-app
-  .use(cors())
-  .use(router)
+async function main() {
+  const PORT = process.env.PORT || 3000
+  const app = express()
 
-app.listen(PORT, ()=> console.log(`server listening in the port: ${PORT}`))
+
+  try {
+    await sequelize.sync();
+  } catch(e){
+    console.error('Unable to connect to the database:', e);
+    process.exit();
+  }
+
+  app
+    .use(express.json())
+    .use(cors())
+    .use(router)
+    .listen(PORT, ()=> console.log(`server listening in the port: ${PORT}`))
+
+}
+
+main()
