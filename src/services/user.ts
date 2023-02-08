@@ -1,10 +1,6 @@
 import User from '../models/user';
 import { IUser } from '../interfaces/user.interface';
 
-export const insert = async(user: IUser) => {
-  return await User.create({...user});
-};
-
 export const getAll = async() => {
   return await User.findAll();
 };

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import {deleteById, getAll, getbyId, insert, update} from '../services/user';
+import {IUser} from '../interfaces/user.interface';
+import {deleteById, getAll, getbyId, update} from '../services/user';
 import {handlerHttp} from '../utils/error.handler';
 
 const ERRORS = {
@@ -14,7 +15,10 @@ export const getUser = async(req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const user = await getbyId(id);
-    res.json(user);
+
+    const data: IUser | string = user ? user :'USER_NOT_FOUND';
+
+    res.json(data);
   } catch(e){ handlerHttp(res, ERRORS.GET_USER); }
 };
 
@@ -23,13 +27,6 @@ export const getUsers = async(_: Request, res: Response) => {
     const AllUsers = await getAll();
     res.json(AllUsers);
   } catch(e){ handlerHttp(res, ERRORS.GET_USERS); }
-};
-
-export const postUser = async (req: Request, res: Response) => {
-  try {
-    const NewUser = await insert(req.body);
-    res.json(NewUser);
-  } catch(e){ handlerHttp(res, ERRORS.POST_USER, e);}
 };
 
 export const updateUser = async(req: Request, res: Response) => {

@@ -1,8 +1,9 @@
 import sequelize from '../database/mysql';
 import { DataTypes, Model } from 'sequelize';
 import Post from './post';
+import { IUser } from '../interfaces/user.interface';
 
-class User extends Model {
+class User extends Model implements IUser {
   declare id: number;
   declare name: string;
   declare password: string;
