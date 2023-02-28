@@ -1,6 +1,7 @@
 import {Auth} from '../interfaces/auth.interface';
 import {UserWithoutID} from '../interfaces/user.interface';
 import User from '../models/user';
+import {generateToken} from '../utils/jwt.handler';
 import {encrypt, verified} from '../utils/password.handler';
 
 export const registerNewUser = async(authUser: UserWithoutID) => {
@@ -16,7 +17,15 @@ export const registerNewUser = async(authUser: UserWithoutID) => {
   const newUser = await User.create({
     ...authUser, password: encryptPassword
   });
-  return newUser;
+
+  const token = await generateToken(newUser.id);
+
+  const data = {
+    user: newUser,
+    token
+  };
+
+  return data;
 };
 
 export const loginUser = async(authUser: Auth) => {
@@ -27,7 +36,14 @@ export const loginUser = async(authUser: Auth) => {
   if(!userExist) return 'THE EMAIL OR PASSWORD IS INCORRECT';
 
   const isCorrectPass = await verified(authUser.password, userExist.password);
-
   if(!isCorrectPass) return 'THE EMAIL OR PASSWORD IS INCORRECT';
-  return userExist;
+
+  const token = await generateToken(userExist.id);
+
+  const data = {
+    user: userExist,
+    token,
+  };
+
+  return data;
 };

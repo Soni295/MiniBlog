@@ -3,7 +3,8 @@ import {loginUser, registerNewUser} from '../services/auth';
 import {handlerHttp} from '../utils/error.handler';
 
 const ERRORS = {
-  REGISTER_USER: 'ERROR_POST_USER',
+  REGISTER_USER: 'ERROR_REGISTER_USER',
+  LOGGING_USER: 'ERROR_LOGGING_USER',
 };
 
 export const register = async(req: Request, res: Response) => {
@@ -17,9 +18,12 @@ export const register = async(req: Request, res: Response) => {
 };
 
 export const login = async(req: Request, res: Response) => {
-  const {email, password} = req.body;
+  const { email, password } = req.body;
   try {
-    const user = await loginUser({email,password});
+    const user = await loginUser({email, password});
+    if (user == 'THE EMAIL OR PASSWORD IS INCORRECT') {
+      return res.status(403).send(user);
+    }
     res.json(user);
   } catch(e){
     handlerHttp(res, ERRORS.REGISTER_USER, e);

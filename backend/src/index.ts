@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import { router } from './routes';
 import sequelize from './database/mysql';
-import {logMiddleware} from './middleware/log';
+import { logMiddleware } from './middleware/log';
 
 async function main() {
   const PORT = process.env.PORT || 3000;

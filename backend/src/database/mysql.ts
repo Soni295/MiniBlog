@@ -8,7 +8,7 @@ const sequelize = new Sequelize(
   config.dbPass, {
     host: 'localhost',
     dialect: 'mysql',
-    logging: console.log
+//    logging: console.log
   }
 );
 
