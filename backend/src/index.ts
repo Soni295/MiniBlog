@@ -6,7 +6,7 @@ import sequelize from './database/mysql';
 import { logMiddleware } from './middleware/log';
 
 async function main() {
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 3001;
   const app = express();
 
   try {

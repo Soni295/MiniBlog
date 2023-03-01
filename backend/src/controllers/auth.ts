@@ -19,6 +19,7 @@ export const register = async(req: Request, res: Response) => {
 
 export const login = async(req: Request, res: Response) => {
   const { email, password } = req.body;
+  console.log({email, password})
   try {
     const user = await loginUser({email, password});
     if (user == 'THE EMAIL OR PASSWORD IS INCORRECT') {
