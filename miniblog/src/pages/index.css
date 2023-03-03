@@ -1,0 +1,36 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form {
+  --width: 300px;
+  display: grid;
+  border: 1px red solid;
+  width: var(--width);
+  justify-content: center;
+}
+.form__login > input {
+  background-color: red;
+  width: 90%;
+}
+
+@media screen and (min-width: 480px) {
+  .form__login {
+    --width: 400px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .form__login {
+    --width: 700px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .form__login {
+    --width: 1000px;
+  }
+}
