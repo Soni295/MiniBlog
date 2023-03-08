@@ -1,0 +1,27 @@
+{
+  "name": "api_typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "lint": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Soni295/MiniBlog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Soni295/MiniBlog/issues"
+  },
+  "homepage": "https://github.com/Soni295/MiniBlog#readme",
+  "devDependencies": {
+    "prettier": "2.8.4",
+    "typescript": "^4.9.3",
+    "husky": "^8.0.3"
+  }
+}

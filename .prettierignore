@@ -1,0 +1,6 @@
+backend/dist/build.js
+databases
+node_modules
+.env
+/dist/build.js
+/databases
