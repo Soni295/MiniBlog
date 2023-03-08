@@ -2,9 +2,9 @@ import { sign, verify } from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'example';
 
-export const generateToken = async(id: number) => {
-  const jwt = sign({id}, JWT_SECRET, {
-    expiresIn: '2h'
+export const generateToken = async (id: number) => {
+  const jwt = sign({ id }, JWT_SECRET, {
+    expiresIn: '2h',
   });
   return jwt;
 };

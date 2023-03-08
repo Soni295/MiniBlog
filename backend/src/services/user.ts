@@ -1,19 +1,19 @@
 import User from '../models/user';
 import { IUser } from '../interfaces/user.interface';
 
-export const getAll = async() => {
+export const getAll = async () => {
   return await User.findAll();
 };
 
-export const getbyId = async(id: string) => {
+export const getbyId = async (id: string) => {
   return await User.findByPk(id);
 };
 
-export const deleteById = async(id: string) => {
+export const deleteById = async (id: string) => {
   return await User.destroy({ where: { id } });
 };
 
-export const update = async(user: IUser) => {
+export const update = async (user: IUser) => {
   const currentUser = await User.findByPk(user.id);
 
   if (currentUser) {

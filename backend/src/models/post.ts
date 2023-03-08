@@ -1,5 +1,5 @@
 import sequelize from '../database/mysql';
-import {DataTypes, Model} from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 
 class Post extends Model {
   declare id: number;
@@ -8,24 +8,27 @@ class Post extends Model {
   declare body: string;
 }
 
-Post.init({
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+Post.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    body: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  body: {
-    type:DataTypes.TEXT,
-    allowNull: false
-  }
-}, {sequelize});
+  { sequelize }
+);
 
 export default Post;

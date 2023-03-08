@@ -11,7 +11,7 @@ async function main() {
 
   try {
     await sequelize.sync();
-  } catch(e){
+  } catch (e) {
     console.error('Unable to connect to the database:', e);
     process.exit();
   }
@@ -20,7 +20,7 @@ async function main() {
     .use(express.json())
     .use(logMiddleware)
     .use(router)
-    .listen(PORT, ()=> console.log(`server listening in the port: ${PORT}`));
+    .listen(PORT, () => console.log(`server listening in the port: ${PORT}`));
 }
 
 main();

@@ -10,34 +10,37 @@ class User extends Model implements IUser {
   declare email: string;
 }
 
-User.init({
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+User.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  email: {
-    type:DataTypes.TEXT,
-    allowNull: false
-  }
-}, {sequelize});
+  { sequelize }
+);
 
 User.hasMany(Post, {
   foreignKey: 'userId',
-  sourceKey: 'id'
+  sourceKey: 'id',
 });
 
 Post.belongsTo(User, {
   foreignKey: 'userId',
-  targetKey:'id'
+  targetKey: 'id',
 });
 
 export default User;
